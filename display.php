@@ -36,8 +36,8 @@ include 'connection.php';
                 <td><?php echo $res['title'] ?></td>
                 <td><?php echo $res['author'] ?></td>
                 <td>
-                    <button class="btn btn-success"> <a href="update.php?id= <?php echo $res['id']; ?>" class="text-white"> Update</a></button>
-                    <button class="btn btn-danger"> <a href="delete.php?id= <?php echo $res['id']; ?>" class="text-white"> Delete</a></button>
+                    <button class="btn btn-success"> <a href="update.php?id=<?php echo $res['id']; ?>" class="text-white"> Update</a></button>
+                    <button class="btn btn-danger"> <a href="delete.php?id=<?php echo $res['id']; ?>" class="text-white"> Delete</a></button>
                 </td>
             </tr>
             <?php

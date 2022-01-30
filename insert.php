@@ -21,9 +21,9 @@ if(isset($_POST['submit_form'])){
 
     // Now let's move the uploaded image into the folder: image
         if (move_uploaded_file($tempname, $folder))  {
-            $msg = "Image uploaded successfully";
+            header('location:display.php');
         }else{
-            $msg = "Failed to upload image";
+            header('location:insert.php');
         }
 }
 ?>

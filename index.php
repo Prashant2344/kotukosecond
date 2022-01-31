@@ -1,3 +1,9 @@
+<?php
+include 'connection.php';
+    $q = "select * from book";
+    $query = mysqli_query($con,$q);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -35,55 +41,18 @@
             <h2>Kotuko Books</h2>
         </div>
         <div class="row mt-2">
+            <?php
+                while($res = mysqli_fetch_array($query)){
+            ?>
             <div class="col-md-3 mb-2 mt-2">
                 <div class="card">
-                    <img src="https://purnapaath.com/uploads/%E0%A4%95%E0%A5%8D%E0%A4%AF%E0%A4%BE%E0%A4%AE%E0%A5%87%E0%A4%B0%E0%A4%BE.png" alt="" style="height:250px;width:100%;object-fit:cover;">
-                    <p style="text-align: center;"><a href=""> Book Title </a></p>
+                    <img src="./image/<?php echo $res['featured_image'] ?>" alt="<?php echo $res['title'] ?>" style="height:250px;width:100%;object-fit:cover;">
+                    <p style="text-align: center;"><a href="bookdetail.php?slug=<?php echo $res['slug']; ?>"> <?php echo $res['title'] ?> </a></p>
                 </div>
             </div>
-            <div class="col-md-3 mb-2 mt-2">
-                <div class="card">
-                    <img src="https://purnapaath.com/uploads/%E0%A4%95%E0%A5%8D%E0%A4%AF%E0%A4%BE%E0%A4%AE%E0%A5%87%E0%A4%B0%E0%A4%BE.png" alt="" style="height:250px;width:100%;object-fit:cover;">
-                    <p style="text-align: center;"><a href=""> Book Title </a></p>
-                </div>
-            </div>
-            <div class="col-md-3 mb-2 mt-2">
-                <div class="card">
-                    <img src="https://purnapaath.com/uploads/%E0%A4%95%E0%A5%8D%E0%A4%AF%E0%A4%BE%E0%A4%AE%E0%A5%87%E0%A4%B0%E0%A4%BE.png" alt="" style="height:250px;width:100%;object-fit:cover;">
-                    <p style="text-align: center;"><a href=""> Book Title </a></p>
-                </div>
-            </div>
-            <div class="col-md-3 mb-2 mt-2">
-                <div class="card">
-                    <img src="https://purnapaath.com/uploads/%E0%A4%95%E0%A5%8D%E0%A4%AF%E0%A4%BE%E0%A4%AE%E0%A5%87%E0%A4%B0%E0%A4%BE.png" alt="" style="height:250px;width:100%;object-fit:cover;">
-                    <p style="text-align: center;"><a href=""> Book Title </a></p>
-                </div>
-            </div>
-
-            <div class="col-md-3 mb-2 mt-2">
-                <div class="card">
-                    <img src="https://purnapaath.com/uploads/%E0%A4%95%E0%A5%8D%E0%A4%AF%E0%A4%BE%E0%A4%AE%E0%A5%87%E0%A4%B0%E0%A4%BE.png" alt="" style="height:250px;width:100%;object-fit:cover;">
-                    <p style="text-align: center;"><a href=""> Book Title </a></p>
-                </div>
-            </div>
-            <div class="col-md-3 mb-2 mt-2">
-                <div class="card">
-                    <img src="https://purnapaath.com/uploads/%E0%A4%95%E0%A5%8D%E0%A4%AF%E0%A4%BE%E0%A4%AE%E0%A5%87%E0%A4%B0%E0%A4%BE.png" alt="" style="height:250px;width:100%;object-fit:cover;">
-                    <p style="text-align: center;"><a href=""> Book Title </a></p>
-                </div>
-            </div>
-            <div class="col-md-3 mb-2 mt-2">
-                <div class="card">
-                    <img src="https://purnapaath.com/uploads/%E0%A4%95%E0%A5%8D%E0%A4%AF%E0%A4%BE%E0%A4%AE%E0%A5%87%E0%A4%B0%E0%A4%BE.png" alt="" style="height:250px;width:100%;object-fit:cover;">
-                    <p style="text-align: center;"><a href=""> Book Title </a></p>
-                </div>
-            </div>
-            <div class="col-md-3 mb-2 mt-2">
-                <div class="card">
-                    <img src="https://purnapaath.com/uploads/%E0%A4%95%E0%A5%8D%E0%A4%AF%E0%A4%BE%E0%A4%AE%E0%A5%87%E0%A4%B0%E0%A4%BE.png" alt="" style="height:250px;width:100%;object-fit:cover;">
-                    <p style="text-align: center;"><a href=""> Book Title </a></p>
-                </div>
-            </div>
+            <?php
+                }
+            ?>
         </div>
     </div>
 

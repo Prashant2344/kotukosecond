@@ -1,3 +1,14 @@
+<?php
+    include 'connection.php';
+    $slug = $_GET['slug'];
+    $q = "Select * FROM `book` WHERE slug='$slug'";
+    $result = mysqli_query($con,$q);
+    if($result->num_rows != 1){
+        die('Book is not in db');
+    }
+    $book = $result->fetch_assoc();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -33,20 +44,20 @@
         <div class="row mb-5">
             <div class="col-md-3">
                 <div style="height: 200px;">
-                    <img src="https://purnapaath.com/uploads/%E0%A4%95%E0%A5%8D%E0%A4%AF%E0%A4%BE%E0%A4%AE%E0%A5%87%E0%A4%B0%E0%A4%BE.png" alt="" style="height:250px;width:100%;object-fit:cover;">
+                    <img src="./image/<?= $book['featured_image']?>" alt="" style="height:250px;width:100%;object-fit:cover;">
                 </div>
             </div>
 
             <div class="col-md-9">
-                <h2>Book Title</h2>
-                <h4>Book Author</h4>
+                <h2><?= $book['title']?></h2>
+                <h4>Book Author :: <?= $book['author']?></h4>
                 <div class="row">
-                    <p style="margin-right: 200px; margin-left: 20px;">publish year</p>
-                    <p style="margin-left: 200px;">Rs500</p>
+                    <p style="margin-right: 200px; margin-left: 20px;"><?= $book['publisher']?> <?= $book['year_of_publish']?></p>
+                    <p style="margin-left: 200px;">$ <?= $book['price']?></p>
                 </div>
                 <hr>
                 <p>
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                    <?= $book['description']?>
                 </p>
             </div>
         </div>

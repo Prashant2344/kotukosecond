@@ -1,6 +1,8 @@
 <?php
 include 'connection.php';
-if(isset($_POST['submit_form'])){
+$q = "select * from book";
+$query = mysqli_query($con,$q);
+if(isset($_POST['submit_form'])){       
     $title = $_POST['title'];
     $slug = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $title)));
     $description = $_POST['description'];
@@ -16,8 +18,17 @@ if(isset($_POST['submit_form'])){
     // Get all the submitted data from the form
     $q = "INSERT INTO `book`( `title`, `slug`, `featured_image`, `description`, `year_of_publish`, `publisher`, `author`, `price`) 
                 VALUES ('$title','$slug','$filename','$description','$publisher','$year','$author','$price')";
-
-    $query = mysqli_query($con,$q);
+    //Create association between the books
+    if (mysqli_query($con,$q)) {
+        $last_id = mysqli_insert_id($con);
+        foreach ($_POST['book_association'] as $book){
+            $q1 = "INSERT INTO `book_association` (`book_id`,`association_id`)
+                    VALUES ($last_id,$book)";
+            $query = mysqli_query($con,$q1);
+        }
+      } else {
+        echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+      }
 
     // Now let's move the uploaded image into the folder: image
         if (move_uploaded_file($tempname, $folder))  {
@@ -39,6 +50,11 @@ if(isset($_POST['submit_form'])){
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
 </head>
 <body>
 
@@ -73,6 +89,17 @@ if(isset($_POST['submit_form'])){
             <input type="file" name="uploadfile" value="" />
             <br>
 
+            <label for="book_association">Related Book</label>
+            <select name="book_association[]" id="book_association" class="selectpicker" multiple data-live-search="true">
+                <?php
+                    while($res = mysqli_fetch_array($query)){
+                ?>
+                <option value="<?php echo $res['id'] ?>"><?php echo $res['title'] ?></option>
+                <?php
+                    }
+                ?>
+            </select>
+            <br>
             <button type="submit" class="btn btn-success" name="submit_form">Submit</button>
 
         </div>

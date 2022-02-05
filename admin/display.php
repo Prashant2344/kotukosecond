@@ -6,7 +6,7 @@
     $loader = new Twig_Loader_Filesystem('../views');
     $twig = new Twig_Environment($loader);
 
-    $q = "select * from book";
+    $q = "select * from book ORDER BY id DESC";
     $query = mysqli_query($con,$q);
 
     while ($row = mysqli_fetch_assoc($query)) {

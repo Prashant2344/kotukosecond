@@ -35,7 +35,7 @@
             <textarea name="description" id="description" required cols="30" rows="4" class="form-control">{% if book.description %} {{book.description}} {% endif %}</textarea>
 
             <label for="year">Year of publication</label>
-            <input type="year" name="year_of_publish" required placeholder="Year of publication" class="form-control" value="{% if book.year_of_publish %} {{book.year_of_publish}} {% endif %}"><br>
+            <input type="number" min="1900" max="2022" step="1" name="year_of_publish" required placeholder="Year of publication" class="form-control" value="{% if book.year_of_publish %} {{book.year_of_publish}} {% endif %}"><br>
 
             <label for="publisher">Publisher</label>
             <input type="text" name="publisher" required placeholder="Publisher" class="form-control" value="{% if book.publisher %} {{book.publisher}} {% endif %}"><br>

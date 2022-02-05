@@ -9,16 +9,25 @@
     $book = $result->fetch_assoc();
 
     $book_id = $book['id'];
-    $relatedBooks = "SELECT book.*
-                    FROM `book`
-                    INNER JOIN book_association ON book.id = book_association.book_id
-                    ORDER BY field(id, $book_id) DESC
-                    LIMIT 4";
-    $query = mysqli_query($con,$relatedBooks);
 
-    while ($row = mysqli_fetch_assoc($query)) {
-        $results[] = $row;
+    $rel = "SELECT DISTINCT association_id FROM book_association ORDER BY field(book_id, $book_id) DESC LIMIT 4";
+    $query1 = mysqli_query($con,$rel);
+    $results1 = "";
+    while ($row1 = mysqli_fetch_assoc($query1)) {
+        print_r($row1);
+        $results1 = $results1 != "" ? $results1 . ',' . $row1['association_id'] : $row1['association_id'];
     }
+    
+    $relatedBooks = "SELECT * from `book` WHERE id in ($results1)";
+
+    $query = mysqli_query($con,$relatedBooks);
+    if($query){
+        while ($row = mysqli_fetch_assoc($query)) {
+            $results[] = $row;
+        }
+    }
+
+    $con->close();
 
     require 'vendor/autoload.php';
 
@@ -26,8 +35,7 @@
     $twig = new Twig_Environment($loader);
 
     echo $twig->render('bookdetail.html',array(
-        'name' => 'Prashant',
         'book' => $book,
-        'books'=> $results
+        'books'=> $results ?? [],
     ));
 ?>

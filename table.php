@@ -6,7 +6,7 @@ $book = "CREATE TABLE book (
 id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 title VARCHAR(30) NULL,
 slug VARCHAR(30) NULL,
-featured_image VARCHAR(50) NULL,
+featured_image VARCHAR(255) NULL,
 description TEXT NULL,
 year_of_publish YEAR NULL,
 publisher VARCHAR(30) NULL,

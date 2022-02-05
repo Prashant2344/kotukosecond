@@ -4,7 +4,7 @@ Note ::
 3. Twig have been used for template
 4. Bootstrap have been used for Admin and frontend
 5. All the html files are inside the views folder, admin backend is in admin folder and backend for frontpage is in root folder
-6. For Twig dependency run command "composer install"
+6. For Twig dependency run command "composer install" after project clone
 
 //For Database connection and table creation
 1. Create a database and add the database name in connection.php file in root folder.

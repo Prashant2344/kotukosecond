@@ -12,6 +12,8 @@
     while ($row = mysqli_fetch_assoc($query)) {
         $results[] = $row;
     }
+
+    $con->close();
     
     echo $twig->render('list.html',array(
         'title' => 'Book List',

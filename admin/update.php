@@ -71,5 +71,6 @@ if(isset($_POST['submit_form'])){
 
         move_uploaded_file($tempname, $folder);
     }
+    
     header('location:display.php');
 }

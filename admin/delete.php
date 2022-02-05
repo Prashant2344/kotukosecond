@@ -13,5 +13,7 @@ include '../connection.php';
     $query = "DELETE FROM `book_association` WHERE book_id=$id OR association_id=$id";
     mysqli_query($con,$query);
 
+    $con->close();
+
     header('location:display.php');
 ?>

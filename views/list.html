@@ -19,6 +19,7 @@
             <tr>
                 <th>Title</th>
                 <th>Author</th>
+                <th>Image</th>
                 <th>Action</th>
             </tr>
 
@@ -26,6 +27,7 @@
             <tr>
                 <td>{{ row.title }}</td>
                 <td>{{ row.author }}</td>
+                <td><img src="../image/{{ row.featured_image }}" alt="{{ row.title }}" class="src" height="60px;" width="50px;"></td>
                 <td>
                     <button class="btn btn-success"> <a href="update.php?id={{ row.id }}" class="text-white"> Update</a></button>
                     <button class="btn btn-danger"> <a href="delete.php?id={{ row.id }}" class="text-white"> Delete</a></button>

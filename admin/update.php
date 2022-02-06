@@ -35,6 +35,7 @@ if(!isset($_POST['submit_form'])){
 }
 
 if(isset($_POST['submit_form'])){
+    // Get all the submitted data from the form
     $title = $_POST['title'];
     $slug = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $title)));
     $description = $_POST['description'];
@@ -43,7 +44,6 @@ if(isset($_POST['submit_form'])){
     $author = $_POST['author'];
     $price = $_POST['price'];
 
-    // Get all the submitted data from the form
     $id = $_POST['id'];
     $q = "update book set id=$id, title='$title', slug='$slug', description='$description', year_of_publish='$year', publisher='$publisher', author='$author', price='$price' where id=$id";
     $query = mysqli_query($con,$q);
@@ -61,6 +61,8 @@ if(isset($_POST['submit_form'])){
     echo "Error: " . $sql . "<br>" . mysqli_error($conn);
     }
 
+
+    //Update feature image if new image is uploaded
     $filename = $_FILES["uploadfile"]["name"];
     if($filename != null){
         $tempname = $_FILES["uploadfile"]["tmp_name"];    

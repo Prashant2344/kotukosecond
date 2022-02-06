@@ -21,6 +21,7 @@ if(!isset($_POST['submit_form'])){
 }
 
 if(isset($_POST['submit_form'])){       
+    // Get all the submitted data from the form
     $title = $_POST['title'];
     $slug = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $title)));
     $description = $_POST['description'];
@@ -33,11 +34,9 @@ if(isset($_POST['submit_form'])){
     $tempname = $_FILES["uploadfile"]["tmp_name"];    
     $folder = "../image/".$filename;
 
-    // Get all the submitted data from the form
     $q = "INSERT INTO `book`( `title`, `slug`, `featured_image`, `description`, `year_of_publish`, `publisher`, `author`, `price`) 
                 VALUES ('$title','$slug','$filename','$description','$year','$publisher','$author','$price')";
                 
-    // Now let's move the uploaded image into the folder: image
     move_uploaded_file($tempname, $folder);
 
     //Create association between the books

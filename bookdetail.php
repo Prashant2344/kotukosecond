@@ -10,6 +10,7 @@
 
     $book_id = $book['id'];
 
+    //To get book association id and converting the resulting array into string
     $rel = "SELECT DISTINCT association_id FROM book_association ORDER BY field(book_id, $book_id) DESC LIMIT 4";
     $query1 = mysqli_query($con,$rel);
     $results1 = "";
@@ -18,6 +19,7 @@
         $results1 = $results1 != "" ? $results1 . ',' . $row1['association_id'] : $row1['association_id'];
     }
     
+    //Passing the ids string to get book details
     $relatedBooks = "SELECT * from `book` WHERE id in ($results1)";
 
     $query = mysqli_query($con,$relatedBooks);
